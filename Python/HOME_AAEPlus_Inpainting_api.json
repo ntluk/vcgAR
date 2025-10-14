@@ -1,0 +1,498 @@
+{
+  "46": {
+    "inputs": {
+      "width": 768,
+      "height": 1344,
+      "aspectRatio": "9:16 - 768x1344 portrait"
+    },
+    "class_type": "SDXLAspectRatio",
+    "_meta": {
+      "title": "SDXL Aspect Ratio"
+    }
+  },
+  "68": {
+    "inputs": {
+      "text_positive": "",
+      "text_negative": "",
+      "style": "base",
+      "log_prompt": false,
+      "style_positive": true,
+      "style_negative": true
+    },
+    "class_type": "SDXLPromptStyler",
+    "_meta": {
+      "title": "SDXL Prompt Styler"
+    }
+  },
+  "82": {
+    "inputs": {
+      "ckpt_name": "dreamshaperXL_v2TurboDpmppSDE.safetensors",
+      "config_name": "Default",
+      "vae_name": "Baked VAE",
+      "clip_skip": 0,
+      "lora1_name": "None",
+      "lora1_model_strength": 1,
+      "lora1_clip_strength": 1,
+      "lora2_name": "None",
+      "lora2_model_strength": 0.72,
+      "lora2_clip_strength": 1,
+      "lora3_name": "None",
+      "lora3_model_strength": 1,
+      "lora3_clip_strength": 1,
+      "positive": [
+        "196",
+        0
+      ],
+      "positive_token_normalization": "none",
+      "positive_weight_interpretation": "comfy",
+      "negative": [
+        "68",
+        1
+      ],
+      "negative_token_normalization": "none",
+      "negative_weight_interpretation": "comfy",
+      "empty_latent_width": [
+        "46",
+        0
+      ],
+      "empty_latent_height": [
+        "46",
+        1
+      ],
+      "batch_size": 1,
+      "seed": 0
+    },
+    "class_type": "ttN pipeLoader",
+    "_meta": {
+      "title": "pipeLoader"
+    }
+  },
+  "83": {
+    "inputs": {
+      "lora_name": "None",
+      "lora_model_strength": 1,
+      "lora_clip_strength": 1,
+      "upscale_method": "None",
+      "factor": 1,
+      "crop": "disabled",
+      "sampler_state": "Sample",
+      "steps": 6,
+      "cfg": 2,
+      "sampler_name": "dpmpp_sde",
+      "scheduler": "karras",
+      "denoise": 1,
+      "image_output": "Preview",
+      "save_prefix": [
+        "103",
+        0
+      ],
+      "seed": 0,
+      "pipe": [
+        "82",
+        0
+      ],
+      "optional_latent": [
+        "111",
+        0
+      ]
+    },
+    "class_type": "ttN pipeKSampler",
+    "_meta": {
+      "title": "pipeKSampler"
+    }
+  },
+  "103": {
+    "inputs": {
+      "Text": "Inpainting_%seed%"
+    },
+    "class_type": "Text box",
+    "_meta": {
+      "title": "Text box"
+    }
+  },
+  "110": {
+    "inputs": {
+      "image": "creation__002 (5).png",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Image"
+    }
+  },
+  "111": {
+    "inputs": {
+      "samples": [
+        "112",
+        0
+      ],
+      "mask": [
+        "194",
+        0
+      ]
+    },
+    "class_type": "SetLatentNoiseMask",
+    "_meta": {
+      "title": "Set Latent Noise Mask"
+    }
+  },
+  "112": {
+    "inputs": {
+      "pixels": [
+        "110",
+        0
+      ],
+      "vae": [
+        "82",
+        5
+      ]
+    },
+    "class_type": "VAEEncode",
+    "_meta": {
+      "title": "VAE Encode"
+    }
+  },
+  "169": {
+    "inputs": {
+      "latent_ver": "xl",
+      "scale_factor": "1.25",
+      "samples": [
+        "83",
+        4
+      ]
+    },
+    "class_type": "LatentUpscaler",
+    "_meta": {
+      "title": "Latent Upscaler"
+    }
+  },
+  "170": {
+    "inputs": {
+      "lora_name": "None",
+      "lora_model_strength": 1,
+      "lora_clip_strength": 1,
+      "upscale_method": "None",
+      "factor": 1,
+      "crop": "disabled",
+      "sampler_state": "Sample",
+      "steps": 6,
+      "cfg": 2,
+      "sampler_name": "dpmpp_sde",
+      "scheduler": "karras",
+      "denoise": 0.54,
+      "image_output": "Save",
+      "save_prefix": [
+        "103",
+        0
+      ],
+      "seed": 0,
+      "pipe": [
+        "83",
+        0
+      ],
+      "optional_latent": [
+        "169",
+        0
+      ]
+    },
+    "class_type": "ttN pipeKSampler",
+    "_meta": {
+      "title": "pipeKSampler"
+    }
+  },
+  "171": {
+    "inputs": {
+      "model_name": "4x-UltraSharp.pth"
+    },
+    "class_type": "UpscaleModelLoader",
+    "_meta": {
+      "title": "Load Upscale Model"
+    }
+  },
+  "172": {
+    "inputs": {
+      "upscale_model": [
+        "171",
+        0
+      ],
+      "image": [
+        "182",
+        0
+      ]
+    },
+    "class_type": "ImageUpscaleWithModel",
+    "_meta": {
+      "title": "Upscale Image (using Model)"
+    }
+  },
+  "175": {
+    "inputs": {
+      "max_width": 512,
+      "max_height": 2160,
+      "min_width": 512,
+      "min_height": 512,
+      "crop_if_required": "no",
+      "images": [
+        "182",
+        0
+      ]
+    },
+    "class_type": "ConstrainImage|pysssss",
+    "_meta": {
+      "title": "Constrain Image 🐍"
+    }
+  },
+  "176": {
+    "inputs": {
+      "max_width": 2160,
+      "max_height": 3840,
+      "min_width": 2160,
+      "min_height": 3840,
+      "crop_if_required": "yes",
+      "images": [
+        "172",
+        0
+      ]
+    },
+    "class_type": "ConstrainImage|pysssss",
+    "_meta": {
+      "title": "Constrain Image 🐍"
+    }
+  },
+  "180": {
+    "inputs": {
+      "model_name": "sam_vit_b_01ec64.pth",
+      "device_mode": "AUTO"
+    },
+    "class_type": "SAMLoader",
+    "_meta": {
+      "title": "SAMLoader (Impact)"
+    }
+  },
+  "181": {
+    "inputs": {
+      "model_name": "bbox/face_yolov8m.pt"
+    },
+    "class_type": "UltralyticsDetectorProvider",
+    "_meta": {
+      "title": "UltralyticsDetectorProvider"
+    }
+  },
+  "182": {
+    "inputs": {
+      "guide_size": 512,
+      "guide_size_for": true,
+      "max_size": 768,
+      "seed": 0,
+      "steps": 6,
+      "cfg": 2,
+      "sampler_name": "dpmpp_sde",
+      "scheduler": "karras",
+      "denoise": 0.5,
+      "feather": 5,
+      "noise_mask": true,
+      "force_inpaint": true,
+      "bbox_threshold": 0.5,
+      "bbox_dilation": 10,
+      "bbox_crop_factor": 3,
+      "sam_detection_hint": "center-1",
+      "sam_dilation": 0,
+      "sam_threshold": 0.93,
+      "sam_bbox_expansion": 0,
+      "sam_mask_hint_threshold": 0.7000000000000001,
+      "sam_mask_hint_use_negative": "False",
+      "drop_size": 10,
+      "wildcard": "",
+      "cycle": 1,
+      "inpaint_model": false,
+      "noise_mask_feather": 10,
+      "image": [
+        "170",
+        7
+      ],
+      "model": [
+        "170",
+        1
+      ],
+      "clip": [
+        "170",
+        6
+      ],
+      "vae": [
+        "170",
+        5
+      ],
+      "positive": [
+        "170",
+        2
+      ],
+      "negative": [
+        "170",
+        3
+      ],
+      "bbox_detector": [
+        "181",
+        0
+      ],
+      "sam_model_opt": [
+        "180",
+        0
+      ]
+    },
+    "class_type": "FaceDetailer",
+    "_meta": {
+      "title": "FaceDetailer"
+    }
+  },
+  "183": {
+    "inputs": {
+      "channel": "blue",
+      "image": [
+        "197",
+        0
+      ]
+    },
+    "class_type": "ImageToMask",
+    "_meta": {
+      "title": "Convert Image to Mask"
+    }
+  },
+  "192": {
+    "inputs": {
+      "images": [
+        "193",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "193": {
+    "inputs": {
+      "mask": [
+        "194",
+        0
+      ]
+    },
+    "class_type": "MaskToImage",
+    "_meta": {
+      "title": "Convert Mask to Image"
+    }
+  },
+  "194": {
+    "inputs": {
+      "mask": [
+        "183",
+        0
+      ]
+    },
+    "class_type": "InvertMask",
+    "_meta": {
+      "title": "InvertMask"
+    }
+  },
+  "195": {
+    "inputs": {
+      "image": "yosemite_outpaint_example (2).png",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Image"
+    }
+  },
+  "196": {
+    "inputs": {
+      "prompt_mode": "fast",
+      "image_analysis": "off",
+      "image": [
+        "195",
+        0
+      ]
+    },
+    "class_type": "ClipInterrogator",
+    "_meta": {
+      "title": "ClipInterrogator"
+    }
+  },
+  "197": {
+    "inputs": {
+      "mode": "resize",
+      "supersample": "true",
+      "resampling": "lanczos",
+      "rescale_factor": 2,
+      "resize_width": 768,
+      "resize_height": 1344,
+      "image": [
+        "198",
+        0
+      ]
+    },
+    "class_type": "Image Resize",
+    "_meta": {
+      "title": "Image Resize"
+    }
+  },
+  "198": {
+    "inputs": {
+      "image": "_CanvasTexture (5).png",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Image"
+    }
+  },
+  "202": {
+    "inputs": {
+      "output_path": "D:\\Projects\\AAGEPlus\\ComfyUI_windows_portable\\ComfyUI\\output",
+      "filename_prefix": "Inpainting",
+      "filename_delimiter": "_",
+      "filename_number_padding": 4,
+      "filename_number_start": "false",
+      "extension": "png",
+      "quality": 100,
+      "lossless_webp": "false",
+      "overwrite_mode": "prefix_as_filename",
+      "show_history": "false",
+      "show_history_by_prefix": "true",
+      "embed_workflow": "true",
+      "show_previews": "true",
+      "images": [
+        "175",
+        0
+      ]
+    },
+    "class_type": "Image Save",
+    "_meta": {
+      "title": "Image Save"
+    }
+  },
+  "203": {
+    "inputs": {
+      "output_path": "D:\\Projects\\AAGEPlus\\ComfyUI_windows_portable\\ComfyUI\\output",
+      "filename_prefix": "Inpainting",
+      "filename_delimiter": "_",
+      "filename_number_padding": 4,
+      "filename_number_start": "false",
+      "extension": "png",
+      "quality": 100,
+      "lossless_webp": "false",
+      "overwrite_mode": "false",
+      "show_history": "false",
+      "show_history_by_prefix": "true",
+      "embed_workflow": "false",
+      "show_previews": "true",
+      "images": [
+        "176",
+        0
+      ]
+    },
+    "class_type": "Image Save",
+    "_meta": {
+      "title": "Image Save"
+    }
+  }
+}

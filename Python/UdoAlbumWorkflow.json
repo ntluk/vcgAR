@@ -1,0 +1,178 @@
+{
+  "47": {
+    "inputs": {
+      "ckpt_name": "sd_xl_base_1.0.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple",
+    "_meta": {
+      "title": "Load Checkpoint"
+    }
+  },
+  "60": {
+    "inputs": {
+      "width": 1024,
+      "height": 1024,
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage",
+    "_meta": {
+      "title": "Empty Latent Image"
+    }
+  },
+  "61": {
+    "inputs": {
+      "samples": [
+        "91",
+        0
+      ],
+      "vae": [
+        "47",
+        2
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "64": {
+    "inputs": {
+      "text": "((text)), watermark, mutated, extra limb, extra finger, multiple hands, disfigured, mutant, warped, twisted",
+      "clip": [
+        "74",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
+    }
+  },
+  "74": {
+    "inputs": {
+      "lora_name": "udoTrain.safetensors",
+      "strength_model": 1,
+      "strength_clip": 1,
+      "model": [
+        "47",
+        0
+      ],
+      "clip": [
+        "47",
+        1
+      ]
+    },
+    "class_type": "LoraLoader",
+    "_meta": {
+      "title": "Load LoRA"
+    }
+  },
+  "75": {
+    "inputs": {
+      "output_path": "C:\\Projekte\\ComfyUI_windows_portable\\ComfyUI\\output",
+      "filename_prefix": "ComfyUI",
+      "filename_delimiter": "_",
+      "filename_number_padding": 4,
+      "filename_number_start": "false",
+      "extension": "jpg",
+      "dpi": 300,
+      "quality": 100,
+      "optimize_image": "true",
+      "lossless_webp": "false",
+      "overwrite_mode": "false",
+      "show_history": "false",
+      "show_history_by_prefix": "true",
+      "embed_workflow": "true",
+      "show_previews": "true",
+      "images": [
+        "61",
+        0
+      ]
+    },
+    "class_type": "Image Save",
+    "_meta": {
+      "title": "Image Save"
+    }
+  },
+  "91": {
+    "inputs": {
+      "seed": 440723934292351,
+      "steps": 40,
+      "cfg": 7,
+      "sampler_name": "euler",
+      "scheduler": "normal",
+      "denoise": 1,
+      "model": [
+        "74",
+        0
+      ],
+      "positive": [
+        "109",
+        0
+      ],
+      "negative": [
+        "64",
+        0
+      ],
+      "latent_image": [
+        "60",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "KSampler"
+    }
+  },
+  "93": {
+    "inputs": {
+      "text": "A portrait of Udo Lindenberg wearing a blue sailor-style jacket and a white captain's hat. The portraits are arranged to form a symbolic peace sign, emphasizing unity and diversity. A bright blue sky with soft white clouds, creating an open and vibrant atmosphere. Rich yellow and orange tones create depth and intensity. Classic and timeless with a touch of mystery, featuring bold text for contrast. Combine these elements into a cohesive, visually striking composition that embodies the artistry and unique aesthetic of Udo Lindenbergs Album Covers. Focus on cinematic depth, vibrant contrasts, and rich visual textures."
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
+    }
+  },
+  "109": {
+    "inputs": {
+      "text": [
+        "112",
+        0
+      ],
+      "clip": [
+        "74",
+        1
+      ]
+    },
+    "class_type": "Text to Conditioning",
+    "_meta": {
+      "title": "Text to Conditioning"
+    }
+  },
+  "111": {
+    "inputs": {
+      "file_path": "C:\\Projekte\\AIArtExtendedPlus\\Prompt\\prompt.txt",
+      "dictionary_name": "[filename]",
+      "label": "TextBatch",
+      "mode": "automatic",
+      "index": 0
+    },
+    "class_type": "Text Load Line From File",
+    "_meta": {
+      "title": "Text Load Line From File"
+    }
+  },
+  "112": {
+    "inputs": {
+      "text": [
+        "111",
+        0
+      ],
+      "label": "Text Output"
+    },
+    "class_type": "Text to Console",
+    "_meta": {
+      "title": "Text to Console"
+    }
+  }
+}

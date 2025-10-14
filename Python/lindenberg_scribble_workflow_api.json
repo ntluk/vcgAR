@@ -1,0 +1,276 @@
+{
+  "5": {
+    "inputs": {
+      "width": 1024,
+      "height": 1024,
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage",
+    "_meta": {
+      "title": "Empty Latent Image"
+    }
+  },
+  "6": {
+    "inputs": {
+      "text": [
+        "85",
+        0
+      ],
+      "clip": [
+        "35",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
+    }
+  },
+  "7": {
+    "inputs": {
+      "text": "easynegative, badhandv4, low quality, worst quality",
+      "clip": [
+        "35",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
+    }
+  },
+  "20": {
+    "inputs": {
+      "ckpt_name": "sd_xl_base_1.0_0.9vae.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple",
+    "_meta": {
+      "title": "Load Checkpoint"
+    }
+  },
+  "35": {
+    "inputs": {
+      "lora_name": "base_udo_lindenberg_style.safetensors",
+      "strength_model": 0.9,
+      "strength_clip": 0.1,
+      "model": [
+        "20",
+        0
+      ],
+      "clip": [
+        "20",
+        1
+      ]
+    },
+    "class_type": "LoraLoader",
+    "_meta": {
+      "title": "Load LoRA"
+    }
+  },
+  "38": {
+    "inputs": {
+      "vae_name": "vae-ft-mse-840000-ema-pruned.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "Load VAE"
+    }
+  },
+  "45": {
+    "inputs": {
+      "control_net_name": "diffusion_pytorch_model.safetensors"
+    },
+    "class_type": "ControlNetLoader",
+    "_meta": {
+      "title": "Load ControlNet Model"
+    }
+  },
+  "85": {
+    "inputs": {
+      "action": "append",
+      "tidy_tags": "yes",
+      "text_a": [
+        "168",
+        0
+      ],
+      "text_b": [
+        "216",
+        0
+      ],
+      "text_c": "udo lindenberg style",
+      "result": "masterpiece, best quality, udo lindenberg style, how to draw a cat, highly detailed exquisite fanart, illustration of a cat, portrait of a cat, realistic anime cat, cat portrait, a cat, extremely detailed portrait, 8k high quality detailed art, photo of a cat, highly detailed drawing, professional furry drawing, professional drawing, detailed professional art, highly detailed portrait, extremely detailed art, cat detailed, udo lindenberg style"
+    },
+    "class_type": "StringFunction|pysssss",
+    "_meta": {
+      "title": "String Function 🐍"
+    }
+  },
+  "88": {
+    "inputs": {
+      "seed": 693645352866733,
+      "steps": 20,
+      "cfg": 25,
+      "sampler_name": "dpmpp_2m_sde",
+      "scheduler": "karras",
+      "denoise": 1,
+      "model": [
+        "35",
+        0
+      ],
+      "positive": [
+        "6",
+        0
+      ],
+      "negative": [
+        "7",
+        0
+      ],
+      "latent_image": [
+        "5",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "KSampler"
+    }
+  },
+  "89": {
+    "inputs": {
+      "samples": [
+        "88",
+        0
+      ],
+      "vae": [
+        "20",
+        2
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "114": {
+    "inputs": {
+      "strength": 0.6,
+      "conditioning": [
+        "6",
+        0
+      ],
+      "control_net": [
+        "45",
+        0
+      ],
+      "image": [
+        "215",
+        0
+      ]
+    },
+    "class_type": "ControlNetApply",
+    "_meta": {
+      "title": "Apply ControlNet"
+    }
+  },
+  "168": {
+    "inputs": {
+      "prompt": "masterpiece, best quality, udo lindenberg style"
+    },
+    "class_type": "CR Prompt Text",
+    "_meta": {
+      "title": "⚙️ CR Prompt Text"
+    }
+  },
+  "215": {
+    "inputs": {
+      "image": "_CanvasTexture (6).png",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Image"
+    }
+  },
+  "216": {
+    "inputs": {
+      "prompt_mode": "fast",
+      "image_analysis": "on",
+      "text": "a child's drawing,inspired by Hanns Katz,net art,pixiv contest winner,illustration of a cat\n\na child's drawing,inspired by Jim Davis,hyperrealism,deviantart,portrait of a cat\n\na child's drawing,inspired by Tsuguharu Foujita,net art,deviantart,illustration of a cat\n\na portrait,inspired by Louis Wain,net art,deviantart,realistic anime cat\n\na child's drawing,inspired by Tsuguharu Foujita,photorealism,behance,portrait of a cat",
+      "image": [
+        "215",
+        0
+      ]
+    },
+    "class_type": "ClipInterrogator",
+    "_meta": {
+      "title": "ClipInterrogator"
+    }
+  },
+  "217": {
+    "inputs": {
+      "model_name": "4x-UltraSharp.pth"
+    },
+    "class_type": "UpscaleModelLoader",
+    "_meta": {
+      "title": "Load Upscale Model"
+    }
+  },
+  "218": {
+    "inputs": {
+      "upscale_model": [
+        "217",
+        0
+      ],
+      "image": [
+        "89",
+        0
+      ]
+    },
+    "class_type": "ImageUpscaleWithModel",
+    "_meta": {
+      "title": "Upscale Image (using Model)"
+    }
+  },
+  "222": {
+    "inputs": {
+      "max_width": 2160,
+      "max_height": 3840,
+      "min_width": 2160,
+      "min_height": 3840,
+      "crop_if_required": "yes",
+      "images": [
+        "218",
+        0
+      ]
+    },
+    "class_type": "ConstrainImage|pysssss",
+    "_meta": {
+      "title": "Constrain Image 🐍"
+    }
+  },
+  "225": {
+    "inputs": {
+      "output_path": "C:\\Projekte\\ComfyUI_windows_portable\\ComfyUI\\output",
+      "filename_prefix": "ComfyUI",
+      "filename_delimiter": "_",
+      "filename_number_padding": 4,
+      "filename_number_start": "false",
+      "extension": "jpg",
+      "quality": 100,
+      "lossless_webp": "false",
+      "overwrite_mode": "false",
+      "show_history": "false",
+      "show_history_by_prefix": "true",
+      "embed_workflow": "true",
+      "show_previews": "true",
+      "images": [
+        "222",
+        0
+      ]
+    },
+    "class_type": "Image Save",
+    "_meta": {
+      "title": "Image Save"
+    }
+  }
+}
