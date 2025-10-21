@@ -9,9 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 378fb4eec0f59ac4c95c0d5b227aa85e, type: 3}
-  m_Name: SimulationEnvironmentAssetsManager
+  m_Script: {fileID: 11500000, guid: 0bfde92e0a2190c4ca32f6fb0a0c73ce, type: 3}
+  m_Name: MetaXRProjectSettings
   m_EditorClassIdentifier: 
-  m_EnvironmentPrefabPaths:
-  - Packages/com.unity.xr.arfoundation/Assets/Prefabs/DefaultSimulationEnvironment.prefab
-  m_FallbackAtEndOfList: 1
+  boolProperties:
+    keys:
+    - Meta.XR.SDK.UsageSettings.UsesProjectSetupTool
+    values: 01
+  intProperties:
+    keys: []
+    values: 
